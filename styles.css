@@ -1,0 +1,141 @@
+:root {
+    --void-black: #020204;
+    --deep-blue: #001a33;
+    --nebula-purple: #1a012a;
+    --stellar-gold: #d4af37;
+    --neon-purple: #8a2be2;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--void-black);
+    color: white;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Moving Dynamic Gradient Background */
+.bg-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 20% 30%, var(--deep-blue) 0%, var(--void-black) 40%, var(--nebula-purple) 70%, var(--void-black) 100%);
+    background-size: 200% 200%;
+    animation: drift 15s ease infinite;
+}
+
+@keyframes drift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.main-wrapper {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+h1 {
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: var(--stellar-gold);
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+#status {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    color: #aaa;
+}
+
+/* Broad Board Layout */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+    width: 85vmin;
+    height: 85vmin;
+    max-width: 550px;
+    max-height: 550px;
+    background: var(--glass);
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.cell {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.cell:hover:not(.occupied) {
+    background: rgba(138, 43, 226, 0.1);
+    border-color: var(--neon-purple);
+    transform: scale(1.02);
+}
+
+.cell img {
+    width: 65%;
+    height: 65%;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cell.occupied img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Win Effect */
+.cell.winner {
+    background: linear-gradient(135deg, var(--stellar-gold), var(--neon-purple));
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+}
+
+.cell.winner img {
+    filter: brightness(0) contrast(100%); /* Makes icon black on the gold win background */
+}
+
+#reset-btn {
+    padding: 12px 35px;
+    background: transparent;
+    border: 2px solid var(--stellar-gold);
+    color: var(--stellar-gold);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: 0.3s;
+    letter-spacing: 2px;
+}
+
+#reset-btn:hover {
+    background: var(--stellar-gold);
+    color: black;
+    box-shadow: 0 0 20px var(--stellar-gold);
+}
