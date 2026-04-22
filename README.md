@@ -2,7 +2,7 @@
 
 A modern, high-performance Tic-Tac-Toe game built with a deep-space aesthetic. Featuring dynamic gradients, neon gold/purple accents, and an immersive "Cosmic" UI.
 
-**[Live Demo](https://tic-tac-toe260.netlify.app/)**
+**[Live Demo](https://tic-tac-toe-eight-navy-77.vercel.app/)**
 
 ---
 
